@@ -53,13 +53,12 @@ export class App extends Component {
 
   render() {
     const { filter, contacts, initialRender } = this.state;
-    if (initialRender) {
-      return null;
-    }
 
-    const filterContacts = contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
+    if(!contacts){
+      return '';
+    } const filterContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
     return (
       <div className={css.container}>
