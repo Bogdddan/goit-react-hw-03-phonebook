@@ -7,7 +7,8 @@ import Form from "./Form/Form";
 export class App extends Component {
   state = {
     contacts: [],
-    filter: "",
+    filter: '', // або filter: ""
+    initialRender: true,
   };
 
   handleSubmitForm = (name, number) => {
@@ -34,24 +35,28 @@ export class App extends Component {
   };
 
   changeFilter = (e) => {
-    this.setState({ filter: e.currentTarget.value })
+    this.setState({ filter: e.currentTarget.value, initialRender: false });
   };
 
-  componentDidUpdate(prevProps , prevState){
-    if(this.state.contacts !== prevState.contacts){
-      localStorage.setItem('contact' , JSON.stringify(this.state.contacts))
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem("contact", JSON.stringify(this.state.contacts));
     }
   }
 
-  componentDidMount(){
-    const contact = localStorage.getItem('contact')
-    const parsedContacts = JSON.parse(contact)
+  componentDidMount() {
+    const contact = localStorage.getItem("contact");
+    const parsedContacts = JSON.parse(contact);
 
-    this.setState({contacts: parsedContacts});
+    this.setState({ contacts: parsedContacts, initialRender: false });
   }
 
   render() {
-    const { filter, contacts } = this.state;
+    const { filter, contacts, initialRender } = this.state;
+    if (initialRender) {
+      return null; // Пропустити перший рендер, якщо initialRender є true
+    }
+
     const filterContacts = contacts.filter((contact) =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
