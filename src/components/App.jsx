@@ -8,7 +8,6 @@ export class App extends Component {
   state = {
     contacts: [],
     filter: '',
-    initialRender: true,
   };
 
   handleSubmitForm = (name, number) => {
@@ -35,7 +34,7 @@ export class App extends Component {
   };
 
   changeFilter = (e) => {
-    this.setState({ filter: e.currentTarget.value, initialRender: false });
+    this.setState({ filter: e.currentTarget.value, });
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -48,11 +47,11 @@ export class App extends Component {
     const contact = localStorage.getItem("contact");
     const parsedContacts = JSON.parse(contact);
 
-    this.setState({ contacts: parsedContacts, initialRender: false });
+    this.setState({ contacts: parsedContacts, });
   }
 
   render() {
-    const { filter, contacts, initialRender } = this.state;
+    const { filter, contacts, } = this.state;
 
     if(!contacts){
       return '';
