@@ -7,7 +7,7 @@ import Form from "./Form/Form";
 export class App extends Component {
   state = {
     contacts: [],
-    filter: '', // або filter: ""
+    filter: '',
     initialRender: true,
   };
 
@@ -54,7 +54,7 @@ export class App extends Component {
   render() {
     const { filter, contacts, initialRender } = this.state;
     if (initialRender) {
-      return null; // Пропустити перший рендер, якщо initialRender є true
+      return null;
     }
 
     const filterContacts = contacts.filter((contact) =>
